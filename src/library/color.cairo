@@ -12,25 +12,26 @@
 %lang starknet
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
+from starkware.cairo.common.uint256 import Uint256
 from starkware.cairo.common.math import unsigned_div_rem
 
 @storage_var
-func Color_color() -> (color : felt):
+func Color_color(id : Uint256) -> (color : felt):
 end
 
 namespace Color:
     func set_rgb{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-        red : felt, green : felt, blue : felt
+        id : Uint256, red : felt, green : felt, blue : felt
     ):
         let new_color = red + green * 2 ** 8 + blue * 2 ** 16
-        Color_color.write(new_color)
+        Color_color.write(id, new_color)
         return ()
     end
 
-    func get_rgb{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
-        red : felt, green : felt, blue : felt
-    ):
-        let (color) = Color_color.read()
+    func get_rgb{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        id : Uint256
+    ) -> (red : felt, green : felt, blue : felt):
+        let (color) = Color_color.read(id)
         let (color, red) = unsigned_div_rem(color, 2 ** 8)
         let (color, green) = unsigned_div_rem(color, 2 ** 8)
         let (_, blue) = unsigned_div_rem(color, 2 ** 8)
