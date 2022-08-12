@@ -1,4 +1,5 @@
 # SPDX-License-Identifier: GNU General Public License v3.0 or later
+
 # https://en.wikipedia.org/wiki/Pairing_function
 
 from starkware.cairo.common.uint256 import (
