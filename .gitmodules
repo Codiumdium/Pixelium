@@ -1,6 +1,3 @@
 [submodule "imx_starknet"]
 	url = https://github.com/immutable/imx-starknet
 	path = lib/imx_starknet
-[submodule "cairo_contracts"]
-	url = https://github.com/OpenZeppelin/cairo-contracts
-	path = lib/cairo_contracts
