@@ -107,4 +107,11 @@ namespace Pixel:
         let (z) = _pair(x, y)
         return (tokenId=z)
     end
+
+    # Get the timer duration for all pixels
+    # @return duration the timer duration (in second)
+    func get_timer_duration{range_check_ptr}() -> (duration : felt):
+        let (duration) = Timer.get_timer_duration()
+        return (duration)
+    end
 end

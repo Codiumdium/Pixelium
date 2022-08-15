@@ -40,7 +40,7 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     ERC2981_UniDirectional_Mutable.initializer(0, 0)
     AccessControl.initializer()
     AccessControl._grant_role(DEFAULT_ADMIN_ROLE, 0)
-    Timer.initialize(42)
+    Timer.initialize(60*5)
     return ()
 end
 
@@ -334,9 +334,8 @@ func renounceRole{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_
     return ()
 end
 
-#########
-# Pixel #
-#########
+# Pixel
+# See src/ERC721_extension/Pixel.cairo for the documentation
 
 #
 # External (Pixel)
@@ -380,4 +379,10 @@ end
 func getTokenId{range_check_ptr}(x : Uint256, y : Uint256) -> (tokenId : Uint256):
     let (tokenId) = Pixel.get_token_id(x, y)
     return (tokenId)
+end
+
+@view
+func getTimerDuration{range_check_ptr}() -> (duration : felt):
+    let (duration) = Timer.get_timer_duration()
+    return (duration)
 end

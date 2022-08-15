@@ -4,19 +4,19 @@
 
 from starkware.cairo.common.cairo_builtins import HashBuiltin
 from starkware.cairo.common.uint256 import Uint256
-from src.library.timer import Timer, Timer_time, Timer_timer
+from src.library.timer import Timer, Timer_duration, Timer_timer
 
 @view
 func test_initialize{syscall_ptr : felt*, range_check_ptr, pedersen_ptr : HashBuiltin*}():
     alloc_locals
     let time = 42
     Timer.initialize(time)
-    let (read_time) = Timer_time.read()
+    let (read_time) = Timer_duration.read()
     assert read_time = time
 
     let time = 0
     Timer.initialize(time)
-    let (read_time) = Timer_time.read()
+    let (read_time) = Timer_duration.read()
     assert read_time = time
     return ()
 end
@@ -85,26 +85,11 @@ func test_assert_timer_is_over{syscall_ptr : felt*, range_check_ptr, pedersen_pt
     return ()
 end
 
-# @view
-# func test_set_time{syscall_ptr : felt*, range_check_ptr, pedersen_ptr : HashBuiltin*}():
-#     alloc_locals
-
-# let id = Uint256(42, 0)
-#     let time = 42
-#     Time.set_time(id, time)
-#     let (res_time) = Timer_time.read(id)
-#     assert time = res_time
-
-# return ()
-# end
-
-# @view
-# func test_get_time{syscall_ptr : felt*, range_check_ptr, pedersen_ptr : HashBuiltin*}():
-#     alloc_locals
-#     let id = Uint256(42, 0)
-#     let time = 42
-#     Timer_time.write(id, time)
-#     let (res_time) = Time.get_time(id)
-#     assert time = res_time
-#     return ()
-# end
+@view
+func test_get_timer_duration{syscall_ptr : felt*, range_check_ptr, pedersen_ptr : HashBuiltin*}():
+    alloc_locals
+    Timer_duration.write(42)
+    let (duration) = Timer.get_timer_duration()
+    assert duration = 42
+    return ()
+end

@@ -14,22 +14,24 @@ from starkware.starknet.common.syscalls import get_block_timestamp
 
 # Associates a unique identifier to a timer.
 # @param tokenId an unique identifier
-# @return time the time of the end of the timer
+# @return timer the time of the end of the timer
 @storage_var
-func Timer_timer(tolkenId : Uint256) -> (time : felt):
+func Timer_timer(tolkenId : Uint256) -> (timer : felt):
 end
 
 # The timer duration
-# @return time the timer duration
+# @return duration the timer duration
 @storage_var
-func Timer_time() -> (time : felt):
+func Timer_duration() -> (duration : felt):
 end
 
 namespace Timer:
     # Set the timer duration
-    # @param time the timer duration
-    func initialize{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(time : felt):
-        Timer_time.write(time)
+    # @param duration the timer duration
+    func initialize{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
+        duration : felt
+    ):
+        Timer_duration.write(duration)
         return ()
     end
 
@@ -39,8 +41,8 @@ namespace Timer:
         tokenId : Uint256
     ):
         let (block_timestamp) = get_block_timestamp()
-        let (time) = Timer_time.read()
-        let new_time = block_timestamp + time
+        let (duration) = Timer_duration.read()
+        let new_time = block_timestamp + duration
         Timer_timer.write(tokenId, new_time)
         return ()
     end
@@ -60,17 +62,12 @@ namespace Timer:
         return ()
     end
 
-    # func set_time{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    #     tolkenId : Uint256, time : felt
-    # ):
-    #     stamp.write(tolkenId, time)
-    #     return ()
-    # end
-
-    # func get_time{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
-    #     tolkenId : Uint256
-    # ) -> (time : felt):
-    #     let (time) = stamp.read(tolkenId)
-    #     return (time)
-    # end
+    # Get the timer duration
+    # @return duration the timer duration (in second)
+    func get_timer_duration{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}() -> (
+        duration : felt
+    ):
+        let (duration) = Timer_duration.read()
+        return (duration)
+    end
 end
