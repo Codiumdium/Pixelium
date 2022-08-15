@@ -7,7 +7,7 @@ I started to build this project at the [Starknet House Hackathon](https://www.st
 # How does Pixelium work?
 **Pixelium** is an **infinite** grid of pixels where each pixel is an **NFT**.
 
-People can buy, sell, trade, or change the color of the pixel they own every *42 second*s.
+People can buy, sell, trade, or change the color of the pixels they own every *42 second*s.
 But every time they do, the minimum price **goes up** a little. 
 
 Why these parameters?
@@ -18,6 +18,21 @@ Why these parameters?
 * After a while I don't want people to be able to change the color of the pixels to **freeze** the drawings.
 
 It is a bit like [r/place](https://en.wikipedia.org/wiki/R/place) but the grid has **no limit** and people **own** it.
+
+# Can you give us some usercases of Pixelium?
+
+As a digital artist, you can :
+- just draw something for fun and keep it on Pixelium for eternity
+-  give or sell your art work to your community pixel by pixel
+- let your community choose how your work should evolve over time
+- choose something to draw and let your community do it
+
+As a art community, you can:
+- fight with many artistic communities to spread your vision of art
+- buy an art work and improve it according to your vision
+- own a few pixels of your favorite artwork
+
+And of course, all the things I can not even imagine now.
 
 # What is the structure of Pixelium's code?
 Pixelium is a set of smartcontract written in [Cairo](https://cairo-lang.org/) and published on [Starknet](https://starknet.io/).
@@ -33,7 +48,7 @@ I use a [pairing function](https://en.wikipedia.org/wiki/Pairing_function) to **
 ## Color
 The color is stored via a [felt](https://www.cairo-lang.org/docs/hello_cairo/intro.html#the-primitive-type-field-element-felt) (252 bits).
 The format of the pixel color is [RGB](https://en.wikipedia.org/wiki/RGB) (Red, Green, Blue). Each color channel uses 8 bits. So 24 bits in total. 
-I use the [bitwise operations](https://www.cairo-lang.org/docs/reference/common_library.html#bitwise) to save each channel.
+~~I use the [bitwise operations](https://www.cairo-lang.org/docs/reference/common_library.html#bitwise) to save each channel.~~
 
 # What needs to be done ? (Roadmap)
 ## Step 1 (For this Hackathon)
@@ -47,7 +62,7 @@ I use the [bitwise operations](https://www.cairo-lang.org/docs/reference/common_
 * FrondEnd (NextJS via StarknetReact)
   * Select one or more pixels
   * Change the color of one or more pixels
-  * Min, buy, sell, trade, make an offer
+  * Mint, buy, sell, trade, make an offer
   * Zoom in, zoom out, move the view area
 
 ## Step 3 (In few months) 
