@@ -21,6 +21,7 @@ from immutablex.starknet.auxiliary.erc2981.unidirectional_mutable import (
     ERC2981_UniDirectional_Mutable,
 )
 
+from src.library.timer import Timer
 from src.ERC721_extension.Pixel import Pixel
 
 #
@@ -40,7 +41,7 @@ func constructor{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_p
     ERC2981_UniDirectional_Mutable.initializer(0, 0)
     AccessControl.initializer()
     AccessControl._grant_role(DEFAULT_ADMIN_ROLE, 0)
-    Timer.initialize(60*5)
+    Timer.initialize(60 * 5)
     return ()
 end
 
@@ -382,7 +383,9 @@ func getTokenId{range_check_ptr}(x : Uint256, y : Uint256) -> (tokenId : Uint256
 end
 
 @view
-func getTimerDuration{range_check_ptr}() -> (duration : felt):
+func getTimerDuration{syscall_ptr : felt*, range_check_ptr, pedersen_ptr : HashBuiltin*}() -> (
+    duration : felt
+):
     let (duration) = Timer.get_timer_duration()
     return (duration)
 end
