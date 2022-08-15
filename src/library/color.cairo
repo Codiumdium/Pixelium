@@ -1,5 +1,8 @@
 # SPDX-License-Identifier: GNU General Public License v3.0 or later
 
+# This code associates a unique identifier to a color.
+# A color can only be changed by the owner of an identifier.
+
 # https://www.cairo-lang.org/docs/hello_cairo/intro.html#the-primitive-type-field-element-felt
 # https://en.wikipedia.org/wiki/RGB
 
@@ -17,11 +20,20 @@ from starkware.cairo.common.math import unsigned_div_rem
 from starkware.starknet.common.syscalls import get_caller_address
 from immutablex.starknet.token.erc721.library import ERC721
 
+# Associates a unique identifier to a 24 bits color.
+# @param tokenId an unique identifier
+# @return the red, green and blue channels of the color
 @storage_var
 func Color_color(tokenId : Uint256) -> (color : felt):
 end
 
 namespace Color:
+    # Change the color associated to an identifier
+    # A color can only be changed by the owner of an identifier.
+    # @param tokenId an unique identifier
+    # @param red the red channel of the color
+    # @param green the green channel of the color
+    # @param blue the blue channel of the color
     func set_rgb{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         tokenId : Uint256, red : felt, green : felt, blue : felt
     ):
@@ -37,6 +49,9 @@ namespace Color:
         return ()
     end
 
+    # Get the color associated to an identifier
+    # @param tokenId an unique identifier
+    # @return the red, green and blue channels of the color
     func get_rgb{syscall_ptr : felt*, pedersen_ptr : HashBuiltin*, range_check_ptr}(
         tokenId : Uint256
     ) -> (red : felt, green : felt, blue : felt):

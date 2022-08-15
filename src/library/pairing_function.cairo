@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: GNU General Public License v3.0 or later
 
-# https://en.wikipedia.org/wiki/Pairing_function
+# Pairing functions
+# These types of functions encode two numbers into a single number
+# or decode a single number into two numbers
+# @see https://en.wikipedia.org/wiki/Pairing_function
 
 from starkware.cairo.common.uint256 import (
     Uint256,
@@ -12,10 +15,13 @@ from starkware.cairo.common.uint256 import (
 )
 
 # Cantor pairing function
-# https://en.wikipedia.org/wiki/Pairing_function
-# https://math.stackexchange.com/questions/222709/inverting-the-cantor-pairing-function
-# x and y are 128 bits unsigned numbers
+# @see https://en.wikipedia.org/wiki/Pairing_function
+# @see https://math.stackexchange.com/questions/222709/inverting-the-cantor-pairing-function
 namespace Cantor:
+    # Encode two numbers into a single number
+    # @params x 128 bits unsigned number
+    # @params y 128 bits unsigned number
+    # @return z 256 bits unsigned number
     func pair{range_check_ptr}(x : Uint256, y : Uint256) -> (z : Uint256):
         let one = Uint256(1, 0)
         let two = Uint256(2, 0)
@@ -27,6 +33,9 @@ namespace Cantor:
         return (z=z)
     end
 
+    # Decode a single number into two numbers
+    # @params z 256 bits unsigned number
+    # @return x and y two 128 bits unsigned numbers
     func unpair{range_check_ptr}(z : Uint256) -> (x : Uint256, y : Uint256):
         alloc_locals
 
