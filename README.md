@@ -1,8 +1,13 @@
+# DEMO
+You can try an alpha of Pixelium 0.0.1 on Goerli. 🥳 (Only for the DEMO!)
+
+https://goerli.voyager.online/contract/0x06f1bf6df81afefe5dfff5c044a2ac641b8f9442d1d67c40d5eebaa308496c37
+
 # What is Pixelium?
 [Pixelium](https://github.com/Codiumdium/Pixelium) is a **collaborative** art game where people **draw** amazing things **together** on an infinite pixel grid.
 I want Pixelium to become a place where digital artists **build** things **for** their community and **with** their community. 
 
-I started to build this project at the [Starknet House Hackathon](https://www.starknet.house/hackathon) (August 11th - 15th 2022).
+I started to build this project at the [Starknet House Hackathon](https://www.starknet.house/hackathon) (August 11th - 15th 2022). [Here my notebook ](https://twitter.com/Codiumdium/status/1558128969068621825)
 
 # How does Pixelium work?
 **Pixelium** is an **infinite** grid of pixels where each pixel is an **NFT**.
@@ -52,11 +57,11 @@ The format of the pixel color is [RGB](https://en.wikipedia.org/wiki/RGB) (Red, 
 
 # What needs to be done ? (Roadmap)
 ## Step 1 (For this Hackathon)
-* ECR721 contract
-* Pairing function
-* Color manipulation
-* Timer
-* Price
+* ECR721 contract ✅
+* Pairing function ✅
+* Color manipulation ✅
+* Timer ✅
+* Price ❌ [TODO]
 
 ## Step 2 (After this Hackathon)
 * FrondEnd (NextJS via StarknetReact)
